@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test PixiJS</title>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="/css/style_me.css">
+  <link rel="stylesheet" href="/css/stroll.css">
+</head>
+<body>
+
+  <div class="row">
+
+    <div class="col-md-4 text-center" >
+      <article>
+        <ul id="panel-image" class="fly-reverse text-center">
+        </ul>
+      </article>
+    </div>
+
+    <div class="col-md-2 text-center">
+      <canvas id="canvas01" height="250px" width="400px" class="text-center" style="cursor: pointer;">
+        Your browser does not support the HTML5 canvas tag.
+      </canvas>
+      <div>
+        <button type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-repeat"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-th"></span>
+        </button>
+        <button type="button" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6 text-center">
+      <canvas id="canvas02" height="700px" width="950px" class="text-center" >
+        Your browser does not support the HTML5 canvas tag.
+      </canvas>
+    </div>
+
+  </div>
+  <script type="text/javascript" src="/js/simulator_tile/logic_me.js"></script>
+  <script type="text/javascript" src="/js/stroll.js"></script>
+  <script type="text/javascript">
+    init_draw_html();
+    init();
+  </script>
+</body>
+</html>
