@@ -3,34 +3,52 @@
 // Init - Draw html
 //--------------------------------------------------- 
 function init_draw_html(){
-  var list_imgs = $('#panel-image');
-  var n = 10;
+  var list_imgs = $('#panel-image ul');
+  var n = 4;
   for (var id_img = 1; id_img <= (3 * n); id_img++) {    
-    list_imgs.append('<li id="card-' + id_img + '" onclick="action_image_selected(this);" > <img data-toggle="magnify" class="img-responsive" src="/img/240x240.png" > </li>');
+    list_imgs.append('<li id="card-' + id_img + '" class="card-of-list" > <img data-toggle="magnify" class="img-responsive" src="/img/icono-taller/tile_awesome_' + id_img + '.png" > </li>');
   }
   stroll.bind('#panel-image ul');
 }
 //---------------------------------------------------
 // Actions / Events  - html
 //---------------------------------------------------
+$( document ).ready(function() {
+  $("#btn-repeat").click(function(event) {
+    if(file_tile != null){
+      console.log('rotate');
+      var ctx = canvas01.getContext('2d');
+      ctx.clearRect(0, 0, canvas01.width, canvas01.height);
+      ctx.rotate(90 * Math.PI / 180.0);
+      ctx.translate(100, 100);
+      print_tile_origin();
+    }
+  })
+  $(".card-of-list").click(function(event) {
+    var id_element = ($(this.id).selector).replace('card-','');
+    console.log(id_element);
+    file_tile = "tile_awesome_" + id_element + ".png.json";
+    init();
+  })
+});
+/*
 function action_image_selected(element){
   var id_element = "#" + element.id;
   $(id_element).effect('bounce', {}, 500, setTimeout(function() {
     $(id_element).removeAttr('style').hide().fadeIn();
   }, 500));
-
   id_element = id_element.replace('#card-','');
-  console.log(file_tile);
+  file_tile = "tile_awesome_" + id_element +".png.json"
   init();
 }
-
+*/
 //---------------------------------------------------
 // Init
 //---------------------------------------------------
 var canvas01 = document.getElementById('canvas01');
 var canvas02 = document.getElementById('canvas02');
 var shape; // Tree of shape
-var file_tile = "0.45-nd.png.json"; // Name of file_json
+var file_tile = "tile_awesome_1.png.json"; // Name of file_json
 
 //---------------------------------------------------
 // Prototypes events
@@ -61,14 +79,17 @@ function init(){
       shape = new Shape();
       var ctx = canvas01.getContext('2d');
       ctx.clearRect(0, 0, canvas01.width, canvas01.height);
+      //ctx.translate(0, 0);
+      ctx.save();
       var ctx_02 = canvas02.getContext('2d');
       ctx_02.clearRect(0, 0, canvas02.width, canvas02.height);
+      ctx_02.save();
       $.getJSON("/data/simulator_tile/" + file_tile,  null)
       .done(function( data ) {
         for(var it in data.shape){
           var polygonJSON = data.shape[it];
           var polygon = new Polygon(polygonJSON._id, polygonJSON.area, {x:10, y:10}, polygonJSON.points, '#FFFFFF', 1);
-          polygon.draw_polygon(ctx, null, polygonJSON.points, 1);
+          polygon.draw_polygon(ctx, null, polygonJSON.points, 0.9);
           shape.add_polygon(polygon);
         }
         shape.polygons.sort(function(a, b){ return a.area - b.area; });
@@ -81,7 +102,7 @@ function init(){
         shape = null;
       });
     }else
-      console.error('Browser not support canvas - init()');
+    console.error('Browser not support canvas - init()');
   }
 }
 //***************************************************
@@ -89,7 +110,7 @@ function print_board_of_tiles(){
   var ctx = canvas02.getContext('2d');
   var origin = {x:10, y:10};
   var polygons = shape.polygons;
-  var n = 6, m = 8, v = 6, step = 228, scale = 0.5;
+  var n = 6, m = 8, v = 6, step = 282, scale = 0.45;
 
   ctx.lineWidth = 0.7;
   ctx.strokeStyle = "#000000";
@@ -106,7 +127,7 @@ function print_board_of_tiles(){
   print_tile_empty(ctx, {x:origin.x, y:origin.y}, step, step, scale);
 
   var flag_position = {x:10, y:10};
-  origin = {x:10 + step + flag_position.x, y:10 + step + flag_position.y};
+  origin = {x:4 + step + flag_position.x, y:5 + step + flag_position.y};
   for(var i = 1; i <= (4 * v); i++){
     for(var it = polygons.length - 1; it >= 0; it--){
       var polygon = polygons[it];
@@ -114,7 +135,7 @@ function print_board_of_tiles(){
     }
     origin.x += step;
     if(i % v == 0){
-      origin.x = 10 + step + flag_position.x;
+      origin.x = 4 + step + flag_position.x;
       origin.y += step;
     }
   }
@@ -133,7 +154,7 @@ function print_tile_origin(){
   var polygons = shape.polygons;
   for(var it = polygons.length - 1; it >= 0; it--){
     var polygon = polygons[it];
-    polygon.draw_polygon(ctx, null, null, 1);
+    polygon.draw_polygon(ctx, null, null, 0.9);
   } 
 }
 //***************************************************
