@@ -5,51 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Test PixiJS</title>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+  
+  <script type="text/javascript" src="/js/semantic.js"></script>
+  <link rel="stylesheet" href="/css/semantic.css">
   <link rel="stylesheet" href="/css/style_me.css">
   <link rel="stylesheet" href="/css/stroll.css">
 </head>
 <body>
 
-  <div class="row">
-
-    <div id="panel-image" class="col-md-3 text-center" >
-      <article>
-        <ul class="fly-reverse">
-        </ul>
-      </article>
-    </div>
-
-    <div class="col-md-2 text-center">
-      <canvas id="canvas01" height="320px" width="350px" class="text-center" style="cursor: pointer;">
-        Your browser does not support the HTML5 canvas tag.
-      </canvas>
-      <div>
-        <button id="btn-repeat" type="button" class="btn btn-default btn-lg"ss>
-          <span class="glyphicon glyphicon-repeat"></span>
-        </button>
-        <button id="btn-th" type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-th"></span>
-        </button>
-        <button id="btn-trash" type="button" class="btn btn-default btn-lg">
-          <span class="glyphicon glyphicon-trash"></span>
-        </button>
+  <div class="ui three column grid">
+    <div class="four wide column">
+      <div id="panel-image" class="ui three cards panel-images">
       </div>
     </div>
-    <div class="col-md-7 text-center">
-      <canvas id="canvas02" height="700px" width="1200px" class="text-center" >
+    
+    <div class="three wide column">
+      <canvas id="canvas01" height="310px" width="300px" class="text-center canvas-tile-origin">
+        Your browser does not support the HTML5 canvas tag.
+      </canvas>      
+      <div id="panel-tools" >
+        <i id="btn-repeat" class="big repeat icon" style="cursor: pointer;" ></i>
+        <i id="btn-clear" class="big trash icon" style="cursor: pointer;" ></i>
+        <div id="btn-color-selected" class="area-color-selected"></div>
+      </div>
+      <div id="panel-colors" class="panel-colors" >
+      </div>
+    </div>
+
+    <div class="column">
+      <canvas id="canvas02" height="700px" width="950px" class="text-center canvas-tile-board" >
         Your browser does not support the HTML5 canvas tag.
       </canvas>
     </div>
-
   </div>
+
   <script type="text/javascript" src="/js/simulator_tile/logic_me.js"></script>
-  <script type="text/javascript" src="/js/stroll.js"></script>
+  <script type="text/javascript" src="/js/simulator_tile/semantic.js"></script>
   <script type="text/javascript">
     init_draw_html();
     init();
