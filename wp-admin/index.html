@@ -5,11 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Test PixiJS</title>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  
-  <script type="text/javascript" src="/js/semantic.js"></script>
-  <link rel="stylesheet" href="/css/semantic.css">
-  <link rel="stylesheet" href="/css/style_me.css">
-  <link rel="stylesheet" href="/css/stroll.css">
+  <link rel="stylesheet" href="/css/simulator_tile/semantic.css">
+  <link rel="stylesheet" href="/css/simulator_tile/style_me.css"> 
 </head>
 <body>
 
@@ -20,12 +17,16 @@
     </div>
     
     <div class="three wide column">
-      <canvas id="canvas01" height="310px" width="300px" class="text-center canvas-tile-origin">
+      <canvas id="canvas01" height="220px" width="300px" class="ui center aligned canvas-tile-origin">
         Your browser does not support the HTML5 canvas tag.
       </canvas>      
-      <div id="panel-tools" >
-        <i id="btn-repeat" class="big repeat icon" style="cursor: pointer;" ></i>
-        <i id="btn-clear" class="big trash icon" style="cursor: pointer;" ></i>
+      <div id="panel-tools" class="panel-tools" >
+        <div id="btn-repeat" class="ui basic icon button" >
+          <i class="repeat icon element-default" ></i>
+        </div>
+        <div id="btn-clear" class="ui basic icon button" >
+          <i class="trash icon element-default" ></i>
+        </div>
         <div id="btn-color-selected" class="area-color-selected"></div>
       </div>
       <div id="panel-colors" class="panel-colors" >
@@ -33,7 +34,7 @@
     </div>
 
     <div class="column">
-      <canvas id="canvas02" height="700px" width="950px" class="text-center canvas-tile-board" >
+      <canvas id="canvas02" height="700px" width="950px" class="ui center aligned canvas-tile-board" >
         Your browser does not support the HTML5 canvas tag.
       </canvas>
     </div>

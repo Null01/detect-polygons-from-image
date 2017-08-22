@@ -3,10 +3,14 @@
 // Init - Draw html
 //-----------------------------------------------------------------------------------
 function init_draw_html(){
-  var n = 15;
+  var n = 55;
   var panel_selector = $('#panel-image');
-  for (var id_img = 1; id_img <= (3 * n); id_img++) {
-     panel_selector.append('<a class="card"> <div class="image"> <img id="tile-' + id_img + '" src="/img/icono-taller/tile_awesome_' + id_img + '.png" class="image-selector" > </div> </a>');
+  for (var id_img = 1; id_img <= n; id_img++) {
+    panel_selector.append('<a class="card">' +
+      '<div class="ui centered medium image">' +
+      '<img id="tile-' + id_img + '" src="' + CONTEXT_PAGE + '/img/simulator_tile/tile_awesome_' + id_img + '.png" class="image-selector" >' +
+      '</div>' + 
+      '</a>');
   }
 
   var colors = [
@@ -26,6 +30,15 @@ function init_draw_html(){
       panel_colors.append('<div id="color-' + it + '-' + jt + '" style="background-color: #' + colors[it][jt] + '" class="block-color" ></div>');
     }
   }
+  $('#btn-repeat').popup({
+    content: 'Seleccione para rotar la figura.'
+  });
+  $('#btn-clear').popup({
+    content: 'Restaurar los valores por defecto.'
+  });
+  $('#btn-color-selected').popup({
+    content: 'Textura seleccionada.'
+  });
 }
 //-----------------------------------------------------------------------------------
 // Actions / Events  - html
@@ -65,6 +78,8 @@ var canvas02 = document.getElementById('canvas02');
 var shape = null; // Tree of shape
 var file_tile = null; // Name of file_json
 var color_selected = null;
+//var CONTEXT_PAGE =  "/wp-admin";
+var CONTEXT_PAGE =  "";
 
 canvas01.addEventListener('click', function(evt) {
   if(shape != null){
@@ -81,22 +96,19 @@ canvas01.addEventListener('click', function(evt) {
 // Function
 //-----------------------------------------------------------------------------------
 function init(){
+  var ctx = canvas01.getContext('2d');
+  ctx.clearRect(0, 0, canvas01.width, canvas01.height);
+  ctx.save();
   if(file_tile != null){
     if (canvas01.getContext) {
-      console.log('init()');
-      
-      var ctx = canvas01.getContext('2d');
-      ctx.clearRect(0, 0, canvas01.width, canvas01.height);
-      ctx.save();
-
-      $.getJSON("/data/simulator_tile/" + file_tile,  null)
+      $.getJSON(CONTEXT_PAGE + "/data/simulator_tile/" + file_tile,  null)
       .done(function( data ) {
-        shape = new Shape({x:2, y:2}, data.properties.width, data.properties.height, 0, 1);
-
+        // (canvas01.width/6)
+        shape = new Shape({x:50, y:0}, data.properties.width, data.properties.height, 0, 0.7);
         ctx.translate(shape.origin.x, shape.origin.y);
         for(var it in data.polygons){
           var polygonJSON = data.polygons[it];
-          var polygon = new Polygon(polygonJSON._id, polygonJSON.area, shape.origin, polygonJSON.points, '#FFFFFF', 1);
+          var polygon = new Polygon(polygonJSON._id, polygonJSON.area, shape.origin, polygonJSON.points, '#FFFFFF', shape.scale);
           polygon.draw_polygon(ctx, null, shape.scale);
           shape.add_polygon(polygon);
         }
@@ -112,6 +124,10 @@ function init(){
       });
     }else
     console.error('Browser not support canvas - init()');
+  }else{
+    ctx.fillStyle = "#000000";
+    ctx.font = "16px Lato, Helvetica Neue, Arial, Helvetica, sans-serif";
+    ctx.fillText("Seleccione una imagen.", (canvas01.width / 4), (canvas01.height / 2));
   }
 }
 //**********************************************************************************
@@ -315,7 +331,7 @@ class Polygon{
     ctx.stroke();
     ctx.beginPath();
     for(var i = 0; i < points2D_XY.length; i++){
-      ctx.lineTo(points2D_XY[i].x * scale, points2D_XY[i].y * scale);
+      ctx.lineTo((points2D_XY[i].x) * scale, (points2D_XY[i].y) * scale);
     }
     ctx.closePath();
     ctx.fillStyle = this._color;
@@ -345,12 +361,13 @@ class Polygon{
     var xi, xj, yi, yj, intersect, inside = false;
     var x = point.x, y = point.y;
     var vs = this._points2D_XY;
+    var flag = {x:20, y:0};
+    //console.log("point:" + point.x + " " + point.y + "   " + this._scale);
     for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-      xi = (this._originX + vs[i].x) * this._scale,
+      xi = (flag.x + this._originX + vs[i].x) * this._scale,
       yi = (this._originY + vs[i].y) * this._scale,
-      xj = (this._originX + vs[j].x) * this._scale,
-      yj = (this._originY + vs[j].y) * this._scale,
-      
+      xj = (flag.x + this._originX + vs[j].x) * this._scale,
+      yj = (this._originY + vs[j].y) * this._scale,      
       intersect = ((yi > y) != (yj > y))
       && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
       if (intersect) inside = !inside;

@@ -35,7 +35,7 @@ def generate(id_file):
 	print "init()"
 	for n, contour in enumerate(contours):
 		coords = approximate_polygon(contour, tolerance=0.5)
-		plt.plot(contour[:, 1], contour[:, 0], linewidth=0.5)
+		#plt.plot(contour[:, 1], contour[:, 0], linewidth=0.5)
 		#plt.fill_between(contour[:, 1], contour[:, 0], color='grey', alpha='0.5')
 		#print('--------------------------------')
 		#print("Number of coordinates:", len(contour), len(coords), coords)
@@ -67,12 +67,13 @@ def generate(id_file):
 	print "file_json:", file
 	with open(file, 'w') as outfile:  
 	    json.dump(data, outfile, indent=3)
-	plt.show()
+	#plt.show()
 
 
+n_rows = 55
 print "Start_generate_data"
-#for id in range(1, (8 * 1) + 1):
-generate(3)
+for id in range(1, n_rows + 1):
+	generate(id)
 print "End_generate_data"
 
 

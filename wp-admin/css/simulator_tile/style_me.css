@@ -1,0 +1,49 @@
+.area-color-selected{
+	margin-bottom: -10px;
+	width: 60px;
+	height: 30px;
+	display: inline-block;
+	border-style: solid;
+	border-width: 1px;
+}
+.panel-images{
+	height: 750px;
+	overflow: scroll;
+}
+.panel-colors{
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 300px;
+}
+.panel-tools{
+	padding-left: 75px;
+}
+.canvas-tile-board{
+	cursor: pointer;
+}
+.canvas-tile-origin{
+	cursor: pointer;
+}
+.block-color{
+	width: 35px;
+	height: 35px;
+	cursor: pointer;
+	display: inline-block;
+	border-style: solid;
+	border-width: 1px;
+	margin-left: 1px;
+}
+.element-default{
+	cursor: pointer;
+}
+/*
+div{
+	border-style: solid;
+	border-width: 1px;
+}
+
+body{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+*/
