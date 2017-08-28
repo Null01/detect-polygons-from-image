@@ -10,33 +10,40 @@
 </head>
 <body>
 
-  <div class="ui three column grid">
-    <div class="four wide column">
-      <div id="panel-image" class="ui three cards panel-images">
-      </div>
-    </div>
-    
-    <div class="three wide column">
-      <canvas id="canvas01" height="220px" width="300px" class="ui center aligned canvas-tile-origin">
-        Your browser does not support the HTML5 canvas tag.
-      </canvas>      
-      <div id="panel-tools" class="panel-tools" >
-        <div id="btn-repeat" class="ui basic icon button" >
-          <i class="repeat icon element-default" ></i>
+  <div class="ui column stackable grid">
+    <div class="three column row">
+      <div class="ui five wide column">
+        <div class="ui segment">
+          <div id="panel-image" class="ui three stackable cards panel-images">
+          </div>
         </div>
-        <div id="btn-clear" class="ui basic icon button" >
-          <i class="trash icon element-default" ></i>
+      </div>
+      <div class="ui three wide column" style="width: 255px !important;" >
+        <div class="ui centered segment">
+          <canvas id="canvas01" height="210px" width="210px" class="ui center aligned canvas-tile-origin">
+            Your browser does not support the HTML5 canvas tag.
+          </canvas>
+          <div id="panel-tools" class="panel-tools" >
+            <div id="btn-pay" class="ui basic icon button" >
+              <i class="shopping basket icon ement-default"></i>
+            </div>
+            <div id="btn-repeat" class="ui basic icon button" >
+              <i class="repeat icon element-default" ></i>
+            </div>
+            <div id="btn-clear" class="ui basic icon button" >
+              <i class="trash icon element-default" ></i>
+            </div>
+            <div id="btn-color-selected" class="area-color-selected"></div>
+          </div>
+          <div id="panel-colors" class="panel-colors" >
+          </div>
         </div>
-        <div id="btn-color-selected" class="area-color-selected"></div>
       </div>
-      <div id="panel-colors" class="panel-colors" >
+      <div class="ui seven wide column">
+        <canvas id="canvas02" height="600px" width="950px" class="ui center aligned canvas-tile-board" >
+          Your browser does not support the HTML5 canvas tag.
+        </canvas>
       </div>
-    </div>
-
-    <div class="column">
-      <canvas id="canvas02" height="700px" width="950px" class="ui center aligned canvas-tile-board" >
-        Your browser does not support the HTML5 canvas tag.
-      </canvas>
     </div>
   </div>
 

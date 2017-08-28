@@ -19,12 +19,12 @@ def generate(id_file):
 	#name_file_tile = "tile_awesome_" + str(id_file) + ".png"
 	#name_file_tile = "" + str(id_file) + ".png"
 	name_file_tile = "tile_awesome_" + str(id_file) + ".png"
-	file_tile = "../../wp-admin/img/" + "icono-taller/" + name_file_tile
+	file_tile = "../../wp-admin/img/simulator_tile/" + name_file_tile
 	print "file_image:", file_tile
 
 	fimg = misc.imread(file_tile)
 	gimg = color.colorconv.rgb2grey(fimg)
-	contours = measure.find_contours(gimg, 0.93)
+	contours = measure.find_contours(gimg, 0.7) #0.93
 	# Build Json object
 	data = {}
 	data['polygons'] = []
@@ -35,10 +35,8 @@ def generate(id_file):
 	print "init()"
 	for n, contour in enumerate(contours):
 		coords = approximate_polygon(contour, tolerance=0.5)
-		#plt.plot(contour[:, 1], contour[:, 0], linewidth=0.5)
+		plt.plot(contour[:, 1], contour[:, 0], linewidth=0.5)
 		#plt.fill_between(contour[:, 1], contour[:, 0], color='grey', alpha='0.5')
-		#print('--------------------------------')
-		#print("Number of coordinates:", len(contour), len(coords), coords)
 		s = ""
 		points = [];
 		for x in coords:
@@ -67,13 +65,13 @@ def generate(id_file):
 	print "file_json:", file
 	with open(file, 'w') as outfile:  
 	    json.dump(data, outfile, indent=3)
-	#plt.show()
+	plt.show()
 
 
 n_rows = 55
 print "Start_generate_data"
-for id in range(1, n_rows + 1):
-	generate(id)
+#for id in range(1, n_rows + 1):
+generate(0)
 print "End_generate_data"
 
 
